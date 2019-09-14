@@ -32,3 +32,33 @@ Example: [falar, é, facil, mostre]
 5. it should remove stop-words
 
 Example: [(falar, é,), (é, fácil), (facil, mostre)]
+
+
+## API REST
+
+Must be a simple flask app. 
+
+### Libs
+    *. Using lib sqlalchemy and migrate to handle database.
+    *. Lib RESTPlus’s to handler api rest.
+    *. Lib Mashmallow to handle with encode and decode data.
+
+### Endpoints
+
+1. api/v1/send-text 
+    Accepts only post with payload with one variable text
+
+2. api/v1/isoleted-vocabulary
+    Accept only get to get vocabulary
+
+3. api/v1/2thgram-vocabulary
+    Accept only get to get vocabulary
+
+4. api/v1/isoleted-vectors
+    Accept only get to get vectors 
+
+5. api/v1/2thgram-vectors
+    Accept only get to get vectors 
+
+6. api/v1/delete-text/<int:textId>
+    accept only delete. (Maybe I will do this if I have time to build frontend side)
