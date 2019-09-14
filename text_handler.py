@@ -12,7 +12,7 @@ from nltk.util import ngrams
 check_if_word_start_with_number = re.compile(r"^\d.*")
 
 
-@attr.s
+@attr.s(frozen=True)
 class TextHandler:
     """
         This class will handler the text.
