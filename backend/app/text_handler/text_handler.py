@@ -116,14 +116,14 @@ class TextHandler:
         words_every_texts = OrderedDict.fromkeys(words_every_texts)
         words_every_texts = list(words_every_texts)
 
-        frequency_distribution_result = []
+        frequency_distribution_result = {}
 
         for index, text in enumerate(self.texts, start=1):
             words = self._base(self._replace_hyphen(text))
             words = list(ngrams(words, num_gram))
             freq_dist = self._calcule_frequence(words)
             words = self._remove_duplicated_without_lost_order(words)
-            frequency_distribution_result.append(
+            frequency_distribution_result.update(
                 {f"text{index}": [freq_dist[word] for word in words_every_texts]}
             )
 

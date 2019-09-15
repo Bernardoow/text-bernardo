@@ -230,14 +230,14 @@ class TestNgVocabularyMethod:
 class TestNgFrequencyDistributionMethod:
     def test_if_return_list_the_frequence_of_list_with_unique_word(self):
         text_handler = TextHandler(["bufalo"])
-        assert text_handler.ng_frequency_distribution() == [{"text1": []}]
+        assert text_handler.ng_frequency_distribution() == {"text1": []}
 
         text_handler = TextHandler(["bufalo bufalo bufalo"])
-        assert text_handler.ng_frequency_distribution() == [{"text1": [2]}]
+        assert text_handler.ng_frequency_distribution() == {"text1": [2]}
 
     def test_if_return_list_the_frequence_of_text_empty(self):
         text_handler = TextHandler([])
-        assert text_handler.ng_frequency_distribution() == []
+        assert text_handler.ng_frequency_distribution() == {}
 
     def test_if_return_list_the_frequence_of_multiples_text(self):
         text_handler = TextHandler(
@@ -254,13 +254,13 @@ class TestNgFrequencyDistributionMethod:
         abreu_gomes = 1
         leonardo_gomes = 1
         text_5_gomes_abreu = 1
-        assert text_handler.ng_frequency_distribution() == [
-            {"text1": [bernardo_gomes, gomes_abreu, abreu_gomes, 0]},
-            {"text2": [0, 0, 0, 0]},
-            {"text3": [0, 0, 0, 0]},
-            {"text4": [0, 0, 0, 0]},
-            {"text5": [0, text_5_gomes_abreu, 0, leonardo_gomes]},
-        ]
+        assert text_handler.ng_frequency_distribution() == {
+            "text1": [bernardo_gomes, gomes_abreu, abreu_gomes, 0],
+            "text2": [0, 0, 0, 0],
+            "text3": [0, 0, 0, 0],
+            "text4": [0, 0, 0, 0],
+            "text5": [0, text_5_gomes_abreu, 0, leonardo_gomes],
+        }
 
 
 class TestFromDocument:
