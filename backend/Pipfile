@@ -9,9 +9,9 @@ black = "*"
 pytest-watch = "*"
 pytest-flask = "===0.15.0"
 pylint-flask = "===0.6"
+pytest-cov = "==2.7.1"
 
 [packages]
-attrs = "*"
 nltk = "===3.4.5"
 flask = "===1.1.1"
 flask-restplus = "===0.13.0"
@@ -20,6 +20,8 @@ flask-sqlalchemy = "===2.4.0"
 flask-migrate = "===2.5.2"
 psycopg2 = "===2.7.5"
 python-dotenv = "===0.10.3"
+attrs = "===19.1.0"
+flask-cors = "===3.0.8"
 
 [requires]
 python_version = "3.7"

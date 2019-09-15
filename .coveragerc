@@ -1,0 +1,9 @@
+[run]
+omit = 
+	**/tests/*
+	**/test_func/*
+	**/run.py
+	**/__init__.py
+	app/api/__init__.py
+	**/instance/test.cfg
+	**/conftest.py
