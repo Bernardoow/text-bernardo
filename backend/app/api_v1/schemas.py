@@ -16,6 +16,13 @@ class VocabularySchema(Schema):
         unknown = EXCLUDE
 
 
+class Gram2VocabularySchema(Schema):
+    vocabulary = fields.List(fields.Tuple((fields.String(), fields.String())), required=True)
+
+    class Meta:
+        unknown = EXCLUDE
+
+
 class FrequenceDistributionField(fields.Field):
     default_error_messages = {
         "invalid_type": "Every value inside dict must be int.",

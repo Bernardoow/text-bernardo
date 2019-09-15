@@ -4,6 +4,7 @@ from marshmallow.exceptions import ValidationError
 from app.api_v1.schemas import (
     FrequenceDistributionField,
     FrequenceDistributionSchema,
+    Gram2VocabularySchema,
     SendTextSchema,
     VocabularySchema,
 )
@@ -132,3 +133,29 @@ class TestFrequenceDistributionSchemaSchema:
             data = {"frequency": {"text1": [1, "2", 3], "text2": [5, 6, 7]}}
             new_data = self.schema.load(data)
             assert data == new_data
+
+
+class TestGram2VocabularySchema:
+    @pytest.fixture(autouse=True)
+    def setUpAndTearDown(self):
+        self.schema = Gram2VocabularySchema()
+
+    def test_should_be_instace_of_schema(self):
+        assert isinstance(self.schema, Schema)
+
+    def test_validate_should_throw_expectio_when_validate_wrong_data(self):
+        with pytest.raises(ValidationError):
+            data = {"country": "brazil"}
+            self.schema.load(data)
+
+    def test_dump_should_create_a_json_with_id_and_text(self):
+        data = {"vocabulary": [("aab", "bab"), ("aa", "ab")]}
+        new_data = self.schema.load(data)
+        assert data == new_data
+
+    def test_dump_should_create_a_json_with_only_field_represented_in_schema(self):
+        data = {"vocabulary": [("aab", "bab"), ("aa", "ab")], "another": [1, 2, 3, 4]}
+
+        new_data = self.schema.load(data)
+        del data["another"]
+        assert data == new_data
