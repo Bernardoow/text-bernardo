@@ -1,7 +1,7 @@
 from flask import request
 from flask_restplus import Resource, Api
 from marshmallow.exceptions import ValidationError
-from app.api_v1.schemas import SendTextSchema, VocabularySchema
+from app.api_v1.schemas import FrequenceDistributionSchema, SendTextSchema, VocabularySchema
 from app.models import Text
 from app.extensions import db
 from app.text_handler.text_handler import TextHandler
@@ -44,3 +44,15 @@ class IsolatedVocabularyApi(Resource):
         schema = VocabularySchema()
 
         return schema.load(vocabulary), 200
+
+
+@api_restfull.route("/isolated-frequency-distribution")
+class IsolatedFrequencyDistributionAPI(Resource):
+    def get(self):
+        list_of_texts = [text for text, in db.session.query(Text.text).order_by(Text.id).all()]
+        text_handler = TextHandler(list_of_texts)
+
+        frequency = {"frequency": text_handler.sw_frequency_distribution()}
+        schema = FrequenceDistributionSchema()
+
+        return schema.load(frequency), 200

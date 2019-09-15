@@ -106,3 +106,64 @@ class TestIsolatedVocabularyAPI:
             ]
         }
 
+
+@pytest.mark.usefixtures("client_class")
+class TestIsolatedFrequencyDistributionAPI:
+    @pytest.fixture(autouse=True)
+    def data_remove_db_test(self):
+        db.session.query(Text).delete()
+
+    def test_check_methods(self, client):
+        response = client.post(url_for("api.isolated_frequency_distribution_api"))
+        assert response.status_code == HTTPStatus.METHOD_NOT_ALLOWED
+        response = client.put(url_for("api.isolated_frequency_distribution_api"))
+        assert response.status_code == HTTPStatus.METHOD_NOT_ALLOWED
+        response = client.delete(url_for("api.isolated_frequency_distribution_api"))
+        assert response.status_code == HTTPStatus.METHOD_NOT_ALLOWED
+        response = client.patch(url_for("api.isolated_frequency_distribution_api"))
+        assert response.status_code == HTTPStatus.METHOD_NOT_ALLOWED
+
+    def test_get_frequency_distribution_with_zero_texts(self, client):
+        response = client.get(url_for("api.isolated_frequency_distribution_api"))
+        assert response.status_code == HTTPStatus.OK
+        assert response.get_json() == {"frequency": {}}
+
+    def test_get_frequency_distribution_one_texts(self, client):
+        text = Text()
+        text.text = "Just a simple text"
+        db.session.add(text)
+        db.session.commit()
+
+        response = client.get(url_for("api.isolated_frequency_distribution_api"))
+        assert response.status_code == HTTPStatus.OK
+        assert response.get_json() == {"frequency": {"text1": [1, 1, 1]}}
+
+    def test_get_frequency_distribution_one_texts(self, client):
+        text = Text()
+        text.text = "Um simples teste"
+        db.session.add(text)
+        db.session.flush()
+
+        text = Text()
+        text.text = "Pytest Python é a melhor biblioteca de testes do Python"
+        db.session.add(text)
+        db.session.flush()
+
+        text = Text()
+        text.text = "Eu estou utilizando a linguagem Flask framework"
+        db.session.add(text)
+        db.session.flush()
+
+        db.session.commit()
+
+        response = client.get(url_for("api.isolated_frequency_distribution_api"))
+
+        assert response.status_code == HTTPStatus.OK
+        assert response.get_json() == {
+            "frequency": {
+                "text1": [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                "text2": [0, 0, 1, 2, 1, 1, 1, 0, 0, 0, 0, 0],
+                "text3": [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
+            }
+        }
+
