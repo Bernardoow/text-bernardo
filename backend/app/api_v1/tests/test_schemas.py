@@ -84,6 +84,11 @@ class TestFrequenceDistributionField:
         with pytest.raises(ValidationError):
             assert self.field.deserialize({"frequency": ["aab", "bab", "aa", "ab"]}) == {}
 
+    def test_should_check_if_list_in_dict_values(self):
+        with pytest.raises(ValidationError):
+            data = {1: 1, "text2": True}
+            assert self.field.deserialize(data) == data
+
     def test_should_check_if_every_key_is_string(self):
         with pytest.raises(ValidationError):
             data = {1: [1, 2, 3], "text2": [5, 6, 7]}
