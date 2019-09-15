@@ -1,5 +1,8 @@
 import os
 
+import nltk
+nltk.download('punkt')
+
 from app import create_app
 
 
