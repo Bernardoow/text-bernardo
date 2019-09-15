@@ -4,8 +4,8 @@ from marshmallow.exceptions import ValidationError
 from app.api_v1.schemas import (
     FrequenceDistributionSchema,
     Gram2VocabularySchema,
+    IsolatedVocabularySchema,
     SendTextSchema,
-    VocabularySchema,
 )
 from app.models import Text
 from app.extensions import db
@@ -46,7 +46,7 @@ class IsolatedVocabularyApi(Resource):
         text_handler = TextHandler(list_of_texts)
 
         vocabulary = {"vocabulary": text_handler.sw_vocabulary()}
-        schema = VocabularySchema()
+        schema = IsolatedVocabularySchema()
 
         return schema.load(vocabulary), 200
 

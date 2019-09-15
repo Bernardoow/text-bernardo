@@ -5,8 +5,8 @@ from app.api_v1.schemas import (
     FrequenceDistributionField,
     FrequenceDistributionSchema,
     Gram2VocabularySchema,
+    IsolatedVocabularySchema,
     SendTextSchema,
-    VocabularySchema,
 )
 
 
@@ -46,7 +46,7 @@ class TestSendTextSchema:
 class TestVocabularySchema:
     @pytest.fixture(autouse=True)
     def setUpAndTearDown(self):
-        self.schema = VocabularySchema()
+        self.schema = IsolatedVocabularySchema()
 
     def test_should_be_instace_of_schema(self):
         assert isinstance(self.schema, Schema)
