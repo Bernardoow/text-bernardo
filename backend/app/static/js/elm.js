@@ -6239,6 +6239,21 @@ var author$project$TextHandlerPage$OnClickSendText = {$: 1};
 var author$project$TextHandlerPage$OnInputText = function (a) {
 	return {$: 0, a: a};
 };
+var author$project$TextHandlerPage$handleActite = F2(
+	function (pos, vision) {
+		switch (vision.$) {
+			case 0:
+				return (1 === pos) ? 'active' : '';
+			case 1:
+				return (2 === pos) ? 'active' : '';
+			case 2:
+				return (3 === pos) ? 'active' : '';
+			case 3:
+				return (4 === pos) ? 'active' : '';
+			default:
+				return (5 === pos) ? 'active' : '';
+		}
+	});
 var elm$core$Dict$values = function (dict) {
 	return A3(
 		elm$core$Dict$foldr,
@@ -6387,7 +6402,9 @@ var author$project$TextHandlerPage$view = function (model) {
 								_List_fromArray(
 									[
 										elm$html$Html$Attributes$id('newText'),
-										elm$html$Html$Attributes$class('nav-link active'),
+										elm$html$Html$Attributes$class('nav-link'),
+										elm$html$Html$Attributes$class(
+										A2(author$project$TextHandlerPage$handleActite, 1, model.a)),
 										elm$html$Html$Attributes$href('#')
 									]),
 								_List_fromArray(
@@ -6412,6 +6429,8 @@ var author$project$TextHandlerPage$view = function (model) {
 								_List_fromArray(
 									[
 										elm$html$Html$Attributes$id('vocabularySimples'),
+										elm$html$Html$Attributes$class(
+										A2(author$project$TextHandlerPage$handleActite, 2, model.a)),
 										elm$html$Html$Attributes$class('nav-link'),
 										elm$html$Html$Attributes$href('#')
 									]),
@@ -6437,6 +6456,8 @@ var author$project$TextHandlerPage$view = function (model) {
 								_List_fromArray(
 									[
 										elm$html$Html$Attributes$id('vocabulary2Gram'),
+										elm$html$Html$Attributes$class(
+										A2(author$project$TextHandlerPage$handleActite, 3, model.a)),
 										elm$html$Html$Attributes$class('nav-link'),
 										elm$html$Html$Attributes$href('#')
 									]),
@@ -6462,6 +6483,8 @@ var author$project$TextHandlerPage$view = function (model) {
 								_List_fromArray(
 									[
 										elm$html$Html$Attributes$id('frequencySimples'),
+										elm$html$Html$Attributes$class(
+										A2(author$project$TextHandlerPage$handleActite, 4, model.a)),
 										elm$html$Html$Attributes$class('nav-link'),
 										elm$html$Html$Attributes$href('#')
 									]),
@@ -6487,6 +6510,8 @@ var author$project$TextHandlerPage$view = function (model) {
 								_List_fromArray(
 									[
 										elm$html$Html$Attributes$id('frequency2Gram'),
+										elm$html$Html$Attributes$class(
+										A2(author$project$TextHandlerPage$handleActite, 5, model.a)),
 										elm$html$Html$Attributes$class('nav-link'),
 										elm$html$Html$Attributes$href('#')
 									]),

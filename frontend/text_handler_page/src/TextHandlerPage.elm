@@ -226,28 +226,67 @@ update msg model =
 ---- VIEW ----
 
 
+handleActite : Int -> Vision -> String
+handleActite pos vision =
+    case vision of
+        SendText _ ->
+            if 1 == pos then
+                "active"
+
+            else
+                ""
+
+        IsolatedVocabulary _ ->
+            if 2 == pos then
+                "active"
+
+            else
+                ""
+
+        GranNVocabulary _ ->
+            if 3 == pos then
+                "active"
+
+            else
+                ""
+
+        IsolatedFrequency _ ->
+            if 4 == pos then
+                "active"
+
+            else
+                ""
+
+        GranNFrequency _ ->
+            if 5 == pos then
+                "active"
+
+            else
+                ""
+
+
 view : Model -> Html Msg
 view model =
     div [ class "container" ]
         [ ul [ class "nav nav-pills nav-fill" ]
             [ li [ onClick <| OnClickChangeVision (SendText { input = "", message = Nothing }), class "nav-item" ]
-                [ a [ id "newText", class "nav-link active", href "#" ]
+                [ a [ id "newText", class "nav-link", class <| handleActite 1 model.vision, href "#" ]
                     [ text "Criar texto" ]
                 ]
             , li [ onClick <| OnClickChangeVision <| IsolatedVocabulary { vocabulary = Nothing }, class "nav-item" ]
-                [ a [ id "vocabularySimples", class "nav-link", href "#" ]
+                [ a [ id "vocabularySimples", class <| handleActite 2 model.vision, class "nav-link", href "#" ]
                     [ text "Mostrar Vocabulário Simples" ]
                 ]
             , li [ onClick <| OnClickChangeVision <| GranNVocabulary { vocabulary = Nothing }, class "nav-item" ]
-                [ a [ id "vocabulary2Gram", class "nav-link", href "#" ]
+                [ a [ id "vocabulary2Gram", class <| handleActite 3 model.vision, class "nav-link", href "#" ]
                     [ text "Mostrar Vocabulário 2Palavras" ]
                 ]
             , li [ onClick <| OnClickChangeVision <| IsolatedFrequency { vocabulary = Nothing, frequency = Nothing }, class "nav-item" ]
-                [ a [ id "frequencySimples", class "nav-link", href "#" ]
+                [ a [ id "frequencySimples", class <| handleActite 4 model.vision, class "nav-link", href "#" ]
                     [ text "Mostrar Frequência Simples" ]
                 ]
             , li [ onClick <| OnClickChangeVision <| GranNFrequency { vocabulary = Nothing, frequency = Nothing }, class "nav-item" ]
-                [ a [ id "frequency2Gram", class "nav-link", href "#" ]
+                [ a [ id "frequency2Gram", class <| handleActite 5 model.vision, class "nav-link", href "#" ]
                     [ text "Mostrar Frequência 2Palavras" ]
                 ]
             ]
